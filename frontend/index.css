@@ -56,8 +56,11 @@ body {
     color: var(--primary-color);
 }
 
+.body-content {
+    min-height: calc(100vh - 150px);
+}
+
 .root-content {
     min-height: 500px;
-    width: 90%;
     margin-top: 100px;
 }
