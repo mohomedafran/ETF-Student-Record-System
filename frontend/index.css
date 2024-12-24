@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} */
+
+:root {
+    --primary-color: #676FA3;
+    --secondary-color: #F7F7F7;
+}
+
+body {
+    margin: 0;
+    background-color: #EEF2FF;
+}
+
+.my-font-primary {
+    font-family: "Montserrat", serif;
+    font-weight: bold;
+}
+
+.my-font-secondary-bold {
+    font-family: "Source Sans 3", serif;
+    font-weight: bold;
+}
+
+.my-font-secondary {
+    font-family: "Source Sans 3", serif;
+}
+
+.topbar {
+    height: 130px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 6px 15px -4px rgba(0, 0, 0, 0.3);
+}
+
+.topbar .system-name {
+    width: 500px;
+    border-right: 2px solid var(--primary-color);
+    gap: 20px;
+}
+
+.topbar .sysname-line {
+    width: 2px;
+    background-color: #9E9E9E;
+    height: 48px;
+}
+
+.topbar .vault-name {
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.topbar .sysname-des {
+    font-size: 20px;
+    line-height: 22px;
+    color: var(--primary-color);
+}
+
+.root-content {
+    min-height: 500px;
+    width: 90%;
+    margin-top: 100px;
+}
