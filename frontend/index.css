@@ -64,7 +64,7 @@ body {
 
 .sidebar {
     width: 20%;
-    background-color: var(--secondary-color);
+    background-color: #FFFFFF;
 }
 
 .root-content {
