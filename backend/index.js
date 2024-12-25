@@ -35,10 +35,21 @@ app.post('/students', async (req, res) => {
     }
 });
 
+
+
 // 2. Show all Students
 app.get('/students', async (req, res) => {
     try {
         const students = await db.collection('students').find().toArray();
+        res.json(students);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/recentlyDeletedStudents', async (req, res) => {
+    try {
+        const students = await db.collection('recentlyDeletedStudents').find().toArray();
         res.json(students);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -150,8 +161,19 @@ app.put('/students/firstname/:name', async (req, res) => {
 app.delete('/students/sid/:sid', async (req, res) => {
     const sid = parseInt(req.params.sid);
     try {
+        // Find the student to be deleted
+        const student = await db.collection('students').findOne({ SID: sid });
+        if (!student) {
+            return res.status(404).json({ error: "Student not found" });
+        }
+
+        // Add the student to recentlyDeletedStudents collection
+        await db.collection('recentlyDeletedStudents').insertOne(student);
+
+        // Delete the student from students collection
         const result = await db.collection('students').deleteOne({ SID: sid });
-        res.json(result);
+
+        res.json({ message: "Student deleted and archived", result });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
