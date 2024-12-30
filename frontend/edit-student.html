@@ -117,11 +117,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        const studentId = new URLSearchParams(window.location.search).get('sid'); // Get student ID from URL
+        const studentId = new URLSearchParams(window.location.search).get('sid'); 
         const studentName = new URLSearchParams(window.location.search).get('fname');
 
         $(document).ready(function () {
-            // Fetch existing student data
             $.ajax({
                 url: `http://localhost:3000/students/sid/${studentId}`,
                 method: 'GET',
@@ -143,7 +142,6 @@
                 }
             });
 
-            // Handle form submission for update
             $('#updateBySID').on('click', function (event) {
                 const updatedData = {
                     SID: Number($('#sid').val()),
@@ -211,7 +209,6 @@
                 });
             });
 
-            // Cancel button redirect
             $('#cancelButton').on('click', function () {
                 window.location.href = '/';
             });

@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Creation</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./index.css" />
   <style>
@@ -88,7 +87,6 @@
       </div>
       <div class="root-content">
 
-        <!-- content starts here -->
         <div class="container mt-5">
           <div class="search-row d-flex flex-row justify-content-end align-items-center">
             <div class="search-selection-box d-flex flex-row align-items-center justify-content-between gap-4">
@@ -130,7 +128,6 @@
 
         </div>
 
-        <!-- this is the pop-up -->
         <div class="popup-container home-delete-popup" id="popup">
           <div class="popup-box">
             <h5>Confirm Delete</h5>
@@ -160,14 +157,13 @@
     $(document).ready(function () {
       const apiUrl = "http://localhost:3000/students";
 
-      // Function to fetch and display student data
       function loadStudents(url = apiUrl) {
         $.ajax({
           url: url,
           method: "GET",
           success: function (response) {
             const tableBody = $("#table-body");
-            tableBody.empty(); // Clear existing rows
+            tableBody.empty();
 
             if (Array.isArray(response) && response.length > 0) {
               response.forEach((student) => {
@@ -216,10 +212,8 @@
         });
       }
 
-      // Initial load of all students
       loadStudents();
 
-      // Handle search functionality
       $("#searchBtn").on("click", function () {
         const searchType = $("#searchSelection").val();
         const searchValue = $("#searchInput").val().trim();
@@ -259,12 +253,11 @@
             return;
         }
 
-        // Load students based on the search criteria
         loadStudents(searchUrl);
       });
 
       $(document).on("click", ".view-action-btn", function () {
-        const sid = $(this).closest("tr").find("td:first").text(); // Get the SID from the first column
+        const sid = $(this).closest("tr").find("td:first").text();
         if (sid) {
           viewStudentDetails(sid);
         }
@@ -272,7 +265,6 @@
 
       function viewStudentDetails(sid) {
         console.log("SID:", sid);
-        // Redirect to the student details page with the SID as a query parameter
         window.location.href = `/student.html?sid=${sid}`;
       }
 
@@ -280,7 +272,7 @@
         console.log("delete icon clicked");
 
         selectedStudentId = $(this).closest("tr").find("td:first").text();
-        selected_StuName = $(this).closest("tr").find("td").eq(1).text(); // Get the student name
+        selected_StuName = $(this).closest("tr").find("td").eq(1).text();
 
         $("#student-id-display").text(selected_StuName);
         $("#popup").fadeIn();
@@ -311,9 +303,8 @@
       });
 
       $(document).on("click", ".edit-action-btn", function () {
-        // Get SID and First Name from the table row
         const sid = $(this).closest("tr").find("td:first").text();
-        const firstName = $(this).closest("tr").find("td").eq(1).text().split(" ")[0]; // Extract First Name
+        const firstName = $(this).closest("tr").find("td").eq(1).text().split(" ")[0];
 
         if (sid && firstName) {
           window.location.href = `/edit-student.html?sid=${encodeURIComponent(sid)}&fname=${encodeURIComponent(firstName)}`;

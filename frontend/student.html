@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Creation</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="./index.css" />
     <style>
@@ -90,7 +89,6 @@
                 <div class="student-details-container container py-5">
                     <h3>Student Details</h3>
                     <div id="student-details" class="student-details d-flex flex-column gap-3">
-                        <!-- Details will be dynamically inserted here -->
                     </div>
 
                     <div class="action-buttons d-flex gap-3 mt-4">
@@ -100,7 +98,6 @@
                     </div>
                 </div>
 
-                <!-- Popup for Delete Confirmation -->
                 <div class="popup-container home-delete-popup" id="popup">
                     <div class="popup-box">
                         <h5>Confirm Delete</h5>
@@ -138,12 +135,10 @@
             const confirmDeleteBtn = document.querySelector('#confirm-delete-btn');
             const studentIdDisplay = document.querySelector('#student-id-display');
 
-            // Extract the student ID from the URL
             const urlParams = new URLSearchParams(window.location.search);
             const studentId = urlParams.get('sid');
             let studentName;
 
-            // Fetch and display student details
             if (studentId) {
                 fetch(`/students/sid/${studentId}`)
                     .then((response) => response.json())
@@ -170,17 +165,14 @@
                     });
             }
 
-            // Go back to all students page
             backBtn.addEventListener('click', () => {
                 window.location.href = '/';
             });
 
-            // Open edit page
             editBtn.addEventListener('click', () => {
                 window.location.href = `/edit-student.html?sid=${studentId}&fname=${studentName}`;
             });
 
-            // Open delete confirmation pop-up
             // deleteBtn.addEventListener('click', () => {
             //     studentIdDisplay.textContent = studentId;
             //     popup.style.display = 'flex';

@@ -4,15 +4,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 
-// MongoDB URI and Database
 const uri = 'mongodb://localhost:27017/';
 const dbName = 'ETF_StudentDB';
 
-// Initialize App
 const app = express();
 app.use(bodyParser.json());
 
-// Connect to MongoDB
 let db;
 MongoClient.connect(uri)
     .then((client) => {
@@ -23,6 +20,11 @@ MongoClient.connect(uri)
 
 
 app.use(express.static(path.join(__dirname, '../frontend')));
+
+
+
+// All API's 
+
 
 // 1. Insert a Student
 app.post('/students', async (req, res) => {
@@ -161,16 +163,19 @@ app.put('/students/firstname/:name', async (req, res) => {
 app.delete('/students/sid/:sid', async (req, res) => {
     const sid = parseInt(req.params.sid);
     try {
-        // Find the student to be deleted
         const student = await db.collection('students').findOne({ SID: sid });
         if (!student) {
             return res.status(404).json({ error: "Student not found" });
         }
 
-        // Add the student to recentlyDeletedStudents collection
+
+        // Here we are using a recently deleted collection to store the deleted records.
+        // so the file will be uploaded to the deleted collection.
+
         await db.collection('recentlyDeletedStudents').insertOne(student);
 
-        // Delete the student from students collection
+        // after iuploading to the deleted collection the file will be deleted the from the original collection
+
         const result = await db.collection('students').deleteOne({ SID: sid });
 
         res.json({ message: "Student deleted and archived", result });
@@ -179,7 +184,6 @@ app.delete('/students/sid/:sid', async (req, res) => {
     }
 });
 
-// Start the Server
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
