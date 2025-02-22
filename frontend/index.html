@@ -224,7 +224,7 @@
         const searchType = $("#searchSelection").val();
         const searchValue = $("#searchInput").val().trim();
 
-        let searchUrl = "http://localhost:3000/students";
+        let searchUrl = "https://etf-student-record-system.up.railway.app";
 
         if (searchValue === "") {
           loadStudents(searchUrl);
@@ -294,7 +294,7 @@
       $("#delete-Student-btn").on("click", function () {
         if (selectedStudentId) {
           $.ajax({
-            url: `http://localhost:3000/students/sid/${selectedStudentId}`,
+            url: `https://etf-student-record-system.up.railway.app/students/sid/${selectedStudentId}`,
             method: "DELETE",
             success: function (response) {
               $(`table tr:has(td:contains(${selectedStudentId}))`).remove();
