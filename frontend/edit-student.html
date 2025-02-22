@@ -123,7 +123,7 @@
         $(document).ready(function () {
             // Fetch existing student data
             $.ajax({
-                url: `http://localhost:3000/students/sid/${studentId}`,
+                url: `https://etf-student-record-system.up.railway.app/students/sid/${studentId}`,
                 method: 'GET',
                 success: function (student) {
                     $('#sid').val(student.SID);

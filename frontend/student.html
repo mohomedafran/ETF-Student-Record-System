@@ -145,7 +145,7 @@
 
             // Fetch and display student details
             if (studentId) {
-                fetch(`/students/sid/${studentId}`)
+                fetch(`https://etf-student-record-system.up.railway.app/students/sid/${studentId}`)
                     .then((response) => response.json())
                     .then((data) => {
                         if (data) {
@@ -222,7 +222,7 @@
             $("#delete-Student-btn").on("click", function () {
                 if (studentId) {
                     $.ajax({
-                        url: `http://localhost:3000/students/sid/${studentId}`,
+                        url: `https://etf-student-record-system.up.railway.app/students/sid/${studentId}`,
                         method: "DELETE",
                         success: function (response) {
                             $("#popup").fadeOut();
