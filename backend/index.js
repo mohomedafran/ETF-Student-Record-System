@@ -5,7 +5,7 @@ const path = require('path');
 
 
 // MongoDB URI and Database
-const uri = 'mongodb://localhost:27017/';
+const uri = 'mongodb+srv://etf_user:etf2025@book-store-mern.nzsgi.mongodb.net/?retryWrites=true&w=majority&appName=Book-Store-MERN/';
 const dbName = 'ETF_StudentDB';
 
 // Initialize App
